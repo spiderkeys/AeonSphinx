@@ -19,7 +19,7 @@ bool CApplication::Initialize()
 
 void CApplication::Update()
 {
-	m_engine.UpdateLoop();
+	m_engine.ProcessorLoop();
 }
 
 void CApplication::Cleanup()

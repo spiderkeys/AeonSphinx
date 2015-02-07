@@ -20,17 +20,19 @@ extern "C"
 class CSphinxEngine
 {
 public:
-	// Pointers
-
-	int m_argc;
-	char **m_argv;
+	// Static members
+	static const arg_t ARGUMENT_DEFINITIONS[];
+	static jmp_buf m_sJumpBuffer;
 
 	// Attributes
-	static const arg_t cont_args_def[];
+	ps_decoder_t 	*m_pPocketSphinxDecoder;
+	cmd_ln_t 		*m_pConfig;
 
-	ps_decoder_t *ps;
-	cmd_ln_t *config;
-	static jmp_buf jbuf;
+	int 			m_argumentCount;
+	char 			**m_commandLineArgs;
+
+
+
 
 	// Methods
 	CSphinxEngine( int argc, char *argv[] );
@@ -38,13 +40,13 @@ public:
 
 	bool Initialize();
 
-	void UpdateLoop();
+	void ProcessorLoop();
 
 	void Cleanup();
 
 	bool LoadConfiguration();
 
-	void RecognizeFromMicrophone();
+	void ProcessMicrophoneInput();
 
 
 	void Msleep( int32 msIn );
